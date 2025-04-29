@@ -1,0 +1,30 @@
+{
+  "name": "hackernewsclone-node-graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "compile": "tsc",
+    "start": "npm run compile && node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riot662006/HackerNewsClone-Node-GraphQL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/riot662006/HackerNewsClone-Node-GraphQL/issues"
+  },
+  "homepage": "https://github.com/riot662006/HackerNewsClone-Node-GraphQL#readme",
+  "dependencies": {
+    "@apollo/server": "^4.12.0",
+    "graphql": "^16.11.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
