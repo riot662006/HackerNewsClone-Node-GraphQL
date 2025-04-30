@@ -1,3 +1,7 @@
+# Environment files
+.env
+.env.*
+
 # Logs
 logs
 *.log
@@ -134,3 +138,17 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Prisma files
+generated/
+
+# Prisma SQLite DB
+prisma/dev.db
+prisma/dev.db-journal
+
+# Prisma engine files (optional depending on your setup)
+*.log
+*.sqlite
+*.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
