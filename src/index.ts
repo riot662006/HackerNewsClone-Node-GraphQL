@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { readFileSync } from "fs";
 import { PrismaClient } from "../generated/prisma/index.js";
+import { prisma } from "./utils/prisma.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -88,15 +89,16 @@ const server = new ApolloServer<Context>({
   plugins: [
     {
       async requestDidStart({ contextValue }) {
-        let prisma: PrismaClient;
-        return {
-          async willSendResponse() {
-            if (contextValue.prisma) {
-              await contextValue.prisma.$disconnect();
-              console.log("Disconnected from Prisma Client");
-            }
-          },
-        };
+        if (process.env.NODE_ENV === "production") {
+          return {
+            async willSendResponse() {
+              if (contextValue.prisma) {
+                await contextValue.prisma.$disconnect();
+                console.log("Disconnected from Prisma Client");
+              }
+            },
+          };
+        }
       },
     },
   ],
@@ -105,8 +107,6 @@ const server = new ApolloServer<Context>({
 const { url } = await startStandaloneServer<Context>(server, {
   listen: { port: 4000 },
   context: async () => {
-    const prisma = new PrismaClient();
-    console.log("Connected to Prisma Client");
     return { prisma };
   },
 });
