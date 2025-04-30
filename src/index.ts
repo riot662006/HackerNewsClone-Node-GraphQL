@@ -4,9 +4,14 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import { readFileSync } from "fs";
+import { PrismaClient } from "../generated/prisma/index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+interface Context {
+  prisma: PrismaClient;
+}
 
 type Link = {
   id: string;
@@ -38,7 +43,10 @@ const resolvers = {
       links.push(link);
       return link;
     },
-    updateLink: (parent: any, args: { id: string; url: string; description: string }) => {
+    updateLink: (
+      parent: any,
+      args: { id: string; url: string; description: string }
+    ) => {
       const linkIndex = links.findIndex((link) => link.id === args.id);
       if (linkIndex === -1) {
         throw new Error("Link not found");
@@ -71,16 +79,36 @@ const resolvers = {
 
 // get schema from schema.graphql file
 
-const server = new ApolloServer({
+const server = new ApolloServer<Context>({
   typeDefs: readFileSync(
     join(__dirname, "..", "src", "schema.graphql"),
     "utf-8"
   ),
   resolvers,
+  plugins: [
+    {
+      async requestDidStart({ contextValue }) {
+        let prisma: PrismaClient;
+        return {
+          async willSendResponse() {
+            if (contextValue.prisma) {
+              await contextValue.prisma.$disconnect();
+              console.log("Disconnected from Prisma Client");
+            }
+          },
+        };
+      },
+    },
+  ],
 });
 
-startStandaloneServer(server, {
+const { url } = await startStandaloneServer<Context>(server, {
   listen: { port: 4000 },
-}).then(({ url }) => {
-  console.log(`🚀  Server ready at: ${url}`);
+  context: async () => {
+    const prisma = new PrismaClient();
+    console.log("Connected to Prisma Client");
+    return { prisma };
+  },
 });
+
+console.log(`🚀  Server ready at: ${url}`);
