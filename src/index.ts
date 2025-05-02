@@ -8,6 +8,7 @@ import { prisma } from "./db/prisma.js";
 
 import { Context } from "./types.js";
 import { resolvers } from "./resolvers/index.js";
+import { getUserId } from "./utils.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -41,8 +42,12 @@ const server = new ApolloServer<Context>({
 
 const { url } = await startStandaloneServer<Context>(server, {
   listen: { port: 4000 },
-  context: async () => {
-    return { prisma };
+  context: async ({req}) => {
+    return {
+      prisma,
+      userId: req.headers.authorization ? getUserId(req) : null,
+      req,
+    };
   },
 });
 
