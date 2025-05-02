@@ -1,0 +1,12 @@
+import { IContext, ILink } from "../../types";
+
+export const postedBy = async (
+  parent: ILink,
+  args: undefined,
+  context: IContext
+) =>
+  await context.prisma.link
+    .findUnique({
+      where: { id: Number(parent.id) },
+    })
+    .postedBy();

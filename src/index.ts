@@ -6,7 +6,7 @@ import { dirname, join } from "path";
 import { readFileSync } from "fs";
 import { prisma } from "./db/prisma.js";
 
-import { Context } from "./types.js";
+import { IContext } from "./types.js";
 import { resolvers } from "./resolvers/index.js";
 import { getUserId } from "./utils.js";
 
@@ -16,7 +16,7 @@ const __dirname = dirname(__filename);
 // get schema from schema.graphql file
 // resolvers from resolvers/index.ts
 
-const server = new ApolloServer<Context>({
+const server = new ApolloServer<IContext>({
   typeDefs: readFileSync(
     join(__dirname, "..", "src", "schema.graphql"),
     "utf-8"
@@ -40,7 +40,7 @@ const server = new ApolloServer<Context>({
   ],
 });
 
-const { url } = await startStandaloneServer<Context>(server, {
+const { url } = await startStandaloneServer<IContext>(server, {
   listen: { port: 4000 },
   context: async ({req}) => {
     return {

@@ -1,22 +1,22 @@
 import { IncomingMessage } from "http";
 import { PrismaClient } from "../generated/prisma/index.js";
 
-export interface Context {
+export interface IContext {
   prisma: PrismaClient;
   userId: string | null;
   req: IncomingMessage;
 }
 
-export type Link = {
+export interface ILink {
   id: string;
   url: string;
   description: string;
-  postedBy: User | null;
-};
+  postedBy: IUser | null;
+}
 
-export type User = {
+export interface IUser {
   id: string;
   email: string;
   name: string;
-  links: Link[];
-};
+  links: ILink[];
+}
