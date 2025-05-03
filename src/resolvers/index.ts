@@ -7,6 +7,7 @@ export const resolvers = {
   Query: {
     ...BaseResolvers.Query,
     ...LinkResolvers.Query,
+    ...AuthResolvers.Query,
   },
   Mutation: {
     ...LinkResolvers.Mutation,
