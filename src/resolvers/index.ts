@@ -10,8 +10,12 @@ export const resolvers = {
     ...AuthResolvers.Query,
   },
   Mutation: {
+    ...BaseResolvers.Mutation,
     ...LinkResolvers.Mutation,
     ...AuthResolvers.Mutation,
+  },
+  Subscription: {
+    ...BaseResolvers.Subscription,
   },
   Link: LinkResolvers.Link,
   User: UserResolvers.User,

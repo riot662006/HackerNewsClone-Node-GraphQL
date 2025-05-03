@@ -1,8 +1,11 @@
 import { IncomingMessage } from "http";
 import { PrismaClient } from "../generated/prisma/index.js";
+import { PubSub } from "graphql-subscriptions";
 
 export interface IContext {
   prisma: PrismaClient;
+  pubsub: PubSub;
+  
   userId: string | null;
   req: IncomingMessage;
 }

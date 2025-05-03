@@ -8,6 +8,7 @@ import cors from "cors";
 import http from "http";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import { PubSub } from "graphql-subscriptions";
 import { WebSocketServer } from "ws";
 
 import { fileURLToPath } from "url";
@@ -32,6 +33,8 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
+const pubsub = new PubSub();
+
 const app = express();
 const httpServer = http.createServer(app);
 
@@ -51,6 +54,7 @@ const serverCleanup = useServer(
 
       return {
         prisma,
+        pubsub,
         userId,
       };
     },
@@ -102,6 +106,7 @@ app.use(
   expressMiddleware<IContext>(server, {
     context: async ({ req }) => ({
       prisma,
+      pubsub,
       userId: req.headers.authorization ? getUserId(req) : null,
       req,
     }),

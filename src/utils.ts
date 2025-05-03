@@ -14,7 +14,7 @@ export const getUserId = (req: IncomingMessage | null, authToken?: string) => {
       return userId;
     }
   } else if (authToken) {
-    const { userId } = getTokenPayload(authToken);
+    const { userId } = getTokenPayload(authToken.replace("Bearer ", ""));
     return userId;
   }
 
