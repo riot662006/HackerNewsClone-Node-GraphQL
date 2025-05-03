@@ -50,7 +50,7 @@ const serverCleanup = useServer(
       const { connectionParams } = ctx;
       const token =
         connectionParams?.Authorization || connectionParams?.authorization;
-      const userId = token ? getUserId(null, token as string) : null;
+      const userId = token ? getUserId(token as string) : null;
 
       return {
         prisma,
