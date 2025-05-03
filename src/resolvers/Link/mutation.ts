@@ -18,6 +18,8 @@ export const post = async (
       },
     },
   });
+
+  await context.pubsub.publish("NEW_LINK", { newLink });
   return newLink;
 };
 

@@ -67,6 +67,7 @@ const serverCleanup = useServer(
 
 const server = new ApolloServer<IContext>({
   schema,
+  introspection: true,
   plugins: [
     {
       async requestDidStart({ contextValue }) {

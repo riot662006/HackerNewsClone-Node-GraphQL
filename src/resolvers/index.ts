@@ -16,6 +16,7 @@ export const resolvers = {
   },
   Subscription: {
     ...BaseResolvers.Subscription,
+    ...LinkResolvers.Subscription,
   },
   Link: LinkResolvers.Link,
   User: UserResolvers.User,
