@@ -1,4 +1,4 @@
-import { IContext } from "../../types";
+import { IContext } from "../../types.js";
 
 export const feed = async (
   parent: unknown,

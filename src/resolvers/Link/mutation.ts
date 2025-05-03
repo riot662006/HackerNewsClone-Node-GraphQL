@@ -1,5 +1,5 @@
 import { GraphQLResolveInfo } from "graphql";
-import { IContext } from "../../types";
+import { IContext } from "../../types.js";
 
 export const post = async (
   parent: unknown,

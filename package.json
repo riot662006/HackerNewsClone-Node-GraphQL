@@ -22,13 +22,20 @@
   "homepage": "https://github.com/riot662006/HackerNewsClone-Node-GraphQL#readme",
   "dependencies": {
     "@apollo/server": "^4.12.0",
+    "@graphql-tools/schema": "^10.0.23",
     "@prisma/client": "^6.7.0",
     "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "graphql": "^16.11.0",
-    "jsonwebtoken": "^9.0.2"
+    "graphql-ws": "^6.0.4",
+    "jsonwebtoken": "^9.0.2",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/jsonwebtoken": "^9.0.9",
+    "@types/ws": "^8.18.1",
     "prisma": "^6.7.0",
     "typescript": "^5.8.3"
   }

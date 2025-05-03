@@ -1,4 +1,4 @@
-import { IContext, IUser } from "../../types";
+import { IContext, IUser } from "../../types.js";
 
 export const links = async (
   parent: IUser,

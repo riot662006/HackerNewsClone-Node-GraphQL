@@ -1,4 +1,4 @@
-import { IContext, ILink } from "../../types";
+import { IContext, ILink } from "../../types.js";
 
 export const postedBy = async (
   parent: ILink,
