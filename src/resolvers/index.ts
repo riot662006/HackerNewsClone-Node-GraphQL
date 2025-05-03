@@ -2,6 +2,7 @@ import LinkResolvers from "./Link/index.js";
 import BaseResolvers from "./Base.js";
 import AuthResolvers from "./Auth/index.js";
 import UserResolvers from "./User/index.js";
+import VoteResolvers from "./Vote/index.js";
 
 export const resolvers = {
   Query: {
@@ -13,6 +14,7 @@ export const resolvers = {
     ...BaseResolvers.Mutation,
     ...LinkResolvers.Mutation,
     ...AuthResolvers.Mutation,
+    ...VoteResolvers.Mutation,
   },
   Subscription: {
     ...BaseResolvers.Subscription,
@@ -20,4 +22,5 @@ export const resolvers = {
   },
   Link: LinkResolvers.Link,
   User: UserResolvers.User,
+  Vote: VoteResolvers.Vote,
 };

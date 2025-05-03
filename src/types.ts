@@ -5,7 +5,7 @@ import { PubSub } from "graphql-subscriptions";
 export interface IContext {
   prisma: PrismaClient;
   pubsub: PubSub;
-  
+
   userId: string | null;
   req: IncomingMessage;
 }
@@ -15,6 +15,7 @@ export interface ILink {
   url: string;
   description: string;
   postedBy: IUser | null;
+  votes: IVote[];
 }
 
 export interface IUser {
@@ -22,4 +23,11 @@ export interface IUser {
   email: string;
   name: string;
   links: ILink[];
+  votes: IVote[];
+}
+
+export interface IVote {
+  id: string;
+  user: IUser;
+  link: ILink;
 }
