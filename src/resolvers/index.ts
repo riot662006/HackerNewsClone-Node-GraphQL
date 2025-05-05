@@ -3,11 +3,12 @@ import BaseResolvers from "./Base.js";
 import AuthResolvers from "./Auth/index.js";
 import UserResolvers from "./User/index.js";
 import VoteResolvers from "./Vote/index.js";
+import FeedResolvers from "./Feed/index.js";
 
 export const resolvers = {
   Query: {
     ...BaseResolvers.Query,
-    ...LinkResolvers.Query,
+    ...FeedResolvers.Query,
     ...AuthResolvers.Query,
   },
   Mutation: {

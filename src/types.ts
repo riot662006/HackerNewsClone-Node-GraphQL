@@ -35,6 +35,11 @@ export interface IVote {
   link: ILink;
 }
 
+export interface IFeed {
+  links: ILink[];
+  count: number;
+}
+
 export interface ILinkOrderByInput {
   description?: SortOrder;
   url?: SortOrder;
