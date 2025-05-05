@@ -2,6 +2,23 @@ import { IContext } from "../../types.js";
 
 export const feed = async (
   parent: unknown,
-  args: undefined,
+  args: { filter: string },
   context: IContext
-) => context.prisma.link.findMany();
+) => {
+  if (!context.userId) {
+    throw new Error("Not authenticated");
+  }
+
+  const where = args.filter
+    ? {
+        OR: [
+          { description: { contains: args.filter } },
+          { url: { contains: args.filter } },
+        ],
+      }
+    : {};
+
+  return await context.prisma.link.findMany({
+    where,
+  });
+};
