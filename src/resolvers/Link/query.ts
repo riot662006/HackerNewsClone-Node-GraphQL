@@ -1,8 +1,13 @@
-import { IContext } from "../../types.js";
+import { IContext, ILinkOrderByInput } from "../../types.js";
 
 export const feed = async (
   parent: unknown,
-  args: { filter: string; skip: number; take: number },
+  args: {
+    filter: string;
+    skip: number;
+    take: number;
+    orderBy: ILinkOrderByInput;
+  },
   context: IContext
 ) => {
   if (!context.userId) {
@@ -22,5 +27,6 @@ export const feed = async (
     where,
     skip: args.skip,
     take: args.take,
+    orderBy: args.orderBy,
   });
 };

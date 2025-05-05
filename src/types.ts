@@ -2,6 +2,8 @@ import { IncomingMessage } from "http";
 import { PrismaClient } from "../generated/prisma/index.js";
 import { PubSub } from "graphql-subscriptions";
 
+export type SortOrder = "asc" | "desc";
+
 export interface IContext {
   prisma: PrismaClient;
   pubsub: PubSub;
@@ -12,6 +14,7 @@ export interface IContext {
 
 export interface ILink {
   id: string;
+  createdAt: string;
   url: string;
   description: string;
   postedBy: IUser | null;
@@ -30,4 +33,10 @@ export interface IVote {
   id: string;
   user: IUser;
   link: ILink;
+}
+
+export interface ILinkOrderByInput {
+  description?: SortOrder;
+  url?: SortOrder;
+  createdAt?: SortOrder;
 }
