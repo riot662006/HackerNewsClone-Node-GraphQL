@@ -2,7 +2,7 @@ import { IContext } from "../../types.js";
 
 export const feed = async (
   parent: unknown,
-  args: { filter: string },
+  args: { filter: string; skip: number; take: number },
   context: IContext
 ) => {
   if (!context.userId) {
@@ -20,5 +20,7 @@ export const feed = async (
 
   return await context.prisma.link.findMany({
     where,
+    skip: args.skip,
+    take: args.take,
   });
 };
